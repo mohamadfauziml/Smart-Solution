@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260730-05-6814160","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YAHO2-t-jNE,0","Arial":"YAGyDvJ_4Ts,0","Bebas Neue":"YACgESME5ew,0","Broken Glyph":"YADZ-exUkv0,0","Canva Sans":"YAFdJjTk5UU,0","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAHO2VMiyZo,0","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAEul-FRQw4,0","Georgia":"YAGzXkO0pEM,0","Ghost Mono":"YAHO2EIdDP0,0","Helvetica Neue":"YAFcf6CtJfI,0","Impact":"YAFcfnjI7Vk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YAHO2a5g66Q,0","JetBrains Mono":"YADy3sAhvXQ,0","Oleo Script":"YACgEQQ14jI,0","Playfair Display":"YAFdJhem5V8,1","Poppins":"YAE5fPSY9qM,0","Press Start 2P":"YAFyGr-8pmQ,0","Source Sans 3":"YAG4lO1Mj10,0","Space Grotesk":"YAHO2sjPCSM,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0"}}');</script><script src="/_sdk/a27874207e105461.telemetry_sdk.js" integrity="sha512-wgI5N9F7oA2h3vH+benMYIv4wGqTct4nKWakqgvfgRyBLmfYq8q/fi6gkfWKd2hMsyN+VQ/qOAOpxybwkcoxlA=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission 4: Smart Solution Architect</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0f172a;
+      --panel: #15213a;
+      --panel-2: #1e293b;
+      --cyan: #22d3ee;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --white: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "DM Sans", sans-serif; color: var(--white); }
+    button, select, textarea { font: inherit; }
+    button:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--cyan); outline-offset: 3px;
+    }
+    .mission-shell { width: 100%; min-height: calc(100 * min(var(--vh, 1vh), 1vh)); }
+    .grid-lines {
+      background-image: linear-gradient(rgba(34,211,238,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,.055) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+    .screen { display: none; min-height: calc(100 * min(var(--vh, 1vh), 1vh)); }
+    .screen.active { display: flex; }
+    .studio-screen.active { display: block; }
+    .glass-panel { background: rgba(21,33,58,.92); border: 1px solid rgba(148,163,184,.2); box-shadow: 0 18px 50px rgba(0,0,0,.25); }
+    .tech-label { font-family: "Space Mono", monospace; letter-spacing: .08em; }
+    .project-panel { display: none; }
+    .project-panel.active { display: block; }
+    .review-box { border-left: 3px solid var(--cyan); }
+    .architecture-node { background: #0f172a; border: 1px solid rgba(34,211,238,.42); }
+    .architecture-node strong { color: var(--cyan); }
+    .architecture-arrow { color: var(--cyan); font-size: 1.5rem; line-height: 1; }
+    select, textarea {
+      width: 100%; border: 1px solid #475569; background: #0b1223; color: #f8fafc; border-radius: .7rem; padding: .72rem .8rem;
+    }
+    textarea { min-height: 70px; resize: vertical; }
+    .constraint-chip { border: 1px solid rgba(245,158,11,.45); color: #fcd34d; background: rgba(245,158,11,.09); }
+    .status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+    .pulse-ring { animation: pulse 2.4s infinite; }
+    @keyframes pulse { 50% { opacity: .55; transform: scale(.95); } }
+    .reveal { animation: rise .45s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+    }
+  </style>
+  <script src="/_sdk/935a53bc2e11fb8d.data_sdk.js" type="text/javascript" integrity="sha512-qr2oyPnEys1WebcOABaRh6hG77r5PWpqeWW6JTKbRJqly/INsfBi31CVNlTmHqjgeLpkVmmHZJUdxSx/32tOFQ=="></script>
+  <script src="/_sdk/6030e540d4419216.resizing_sdk.js" type="text/javascript" integrity="sha512-b5KWzyoXsbWP4smq4sftIi6Kts4YVBpBsz0BwCViwbBJkK64a3/Z6ZMdWA+qnplNcXw4mhZeqvQi3mOosiRJdA=="></script>
+ </head>
+ <body data-template-id="__page-root" class="mission-shell grid-lines" style="background: rgb(15, 23, 42);">
+  <main class="w-full">
+   <section id="briefing-screen" class="screen active items-center justify-center px-5 py-10">
+    <div class="w-full max-w-4xl">
+     <div class="glass-panel rounded-3xl overflow-hidden reveal">
+      <div data-template-id="briefing-banner" class="canva-banner px-7 py-4 flex items-center justify-between gap-4" style="background: linear-gradient(90deg, rgb(8, 51, 68), rgb(15, 23, 42));"><span data-template-id="briefing-kicker" class="canva-text tech-label text-sm font-bold" style="color: rgb(34, 211, 238); font-weight: 700; font-style: normal; font-size: 16px;">SMARTCITY ENGINEERING JOURNEY</span> <span class="flex items-center gap-2 text-xs text-cyan-200"><span class="status-dot pulse-ring"></span>SMARTCITY NETWORK ONLINE</span>
+      </div>
+      <div class="p-7 sm:p-12">
+       <p data-template-id="briefing-eyebrow" class="canva-text tech-label text-cyan-300 text-sm mb-4" style="color: rgb(34, 211, 238); font-weight: 700; font-style: normal; font-size: 16px;">MISSION 4 / FINAL CAPSTONE</p>
+       <h1 data-template-id="mission-title" class="canva-text font-bold leading-tight mb-5" style="color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 32px;">Smart Solution Architect</h1>
+       <p data-template-id="mission-story" class="canva-text text-slate-300 max-w-2xl text-lg leading-relaxed" style="color: rgb(203, 213, 225); font-weight: 400; font-style: normal; font-size: 18px; line-height: 1.6;">Congratulations, Lead IoT Solutions Engineer. You have been promoted to the SmartCity Innovation Centre. Five clients require complete IoT solutions for real-world challenges. Design systems that meet their needs while balancing cost, communication range, reliability, power consumption, and usability.</p>
+       <div class="mt-9 flex flex-wrap gap-3">
+        <div class="rounded-xl bg-slate-900/70 border border-slate-700 px-4 py-3"><span class="text-slate-400 text-sm">Duration</span><strong class="block text-cyan-300">35–40 min</strong>
+        </div>
+        <div class="rounded-xl bg-slate-900/70 border border-slate-700 px-4 py-3"><span class="text-slate-400 text-sm">Mode</span><strong class="block text-cyan-300">Individual or Pair</strong>
+        </div>
+        <div class="rounded-xl bg-slate-900/70 border border-slate-700 px-4 py-3"><span class="text-slate-400 text-sm">Projects</span><strong class="block text-cyan-300">6 Designs</strong>
+        </div>
+       </div><button id="start-btn" data-template-id="start-button" type="button" class="canva-button mt-10 inline-flex items-center gap-3 rounded-xl px-6 py-4 font-bold transition hover:brightness-110" style="background: rgb(34, 211, 238); color: rgb(15, 23, 42); font-weight: 700; font-style: normal; font-size: 16px;">Start Designing</button>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="howto-screen" class="screen items-center justify-center px-5 py-10">
+    <div class="w-full max-w-3xl glass-panel rounded-3xl p-7 sm:p-12 reveal">
+     <p data-template-id="howto-kicker" class="canva-text tech-label text-cyan-300 text-sm mb-3" style="color: rgb(34, 211, 238); font-weight: 700; font-style: normal; font-size: 16px;">MISSION CONTROL / PRE-FLIGHT</p>
+     <h2 data-template-id="howto-title" class="canva-text font-bold mb-8" style="color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 24px;">How to Play</h2>
+     <ol class="space-y-4">
+      <li class="flex gap-4"><span class="shrink-0 w-8 h-8 rounded-full bg-cyan-400 text-slate-950 font-bold grid place-items-center">1</span><p data-template-id="howto-step-1" class="canva-text pt-1 text-slate-200" style="color: rgb(226, 232, 240); font-weight: 400; font-style: normal; font-size: 16px;">Read each client brief carefully.</p></li>
+      <li class="flex gap-4"><span class="shrink-0 w-8 h-8 rounded-full bg-cyan-400 text-slate-950 font-bold grid place-items-center">2</span><p data-template-id="howto-step-2" class="canva-text pt-1 text-slate-200" style="color: rgb(226, 232, 240); font-weight: 400; font-style: normal; font-size: 16px;">Review the engineering constraints.</p></li>
+      <li class="flex gap-4"><span class="shrink-0 w-8 h-8 rounded-full bg-cyan-400 text-slate-950 font-bold grid place-items-center">3</span><p data-template-id="howto-step-3" class="canva-text pt-1 text-slate-200" style="color: rgb(226, 232, 240); font-weight: 400; font-style: normal; font-size: 16px;">Choose appropriate IoT components.</p></li>
+      <li class="flex gap-4"><span class="shrink-0 w-8 h-8 rounded-full bg-cyan-400 text-slate-950 font-bold grid place-items-center">4</span><p data-template-id="howto-step-4" class="canva-text pt-1 text-slate-200" style="color: rgb(226, 232, 240); font-weight: 400; font-style: normal; font-size: 16px;">Provide short engineering justifications for your decisions.</p></li>
+      <li class="flex gap-4"><span class="shrink-0 w-8 h-8 rounded-full bg-cyan-400 text-slate-950 font-bold grid place-items-center">5</span><p data-template-id="howto-step-5" class="canva-text pt-1 text-slate-200" style="color: rgb(226, 232, 240); font-weight: 400; font-style: normal; font-size: 16px;">Submit your proposal, read the Engineering Review, and proceed to the next client.</p></li>
+     </ol><button id="begin-btn" data-template-id="begin-button" type="button" class="canva-button mt-10 inline-flex items-center gap-3 rounded-xl px-6 py-4 font-bold transition hover:brightness-110" style="background: rgb(16, 185, 129); color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 16px;">Begin Guided Project</button>
+    </div>
+   </section>
+   <section id="studio-screen" class="screen studio-screen p-4 sm:p-6">
+    <header class="max-w-[1600px] mx-auto mb-4 flex flex-wrap items-center justify-between gap-3">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 grid place-items-center rounded-lg bg-cyan-400 text-slate-950">
+       <i data-lucide="cpu"></i>
+      </div>
+      <div>
+       <p class="tech-label text-cyan-300 text-xs">SMARTCITY INNOVATION CENTRE</p>
+       <h2 data-template-id="studio-title" class="canva-text font-bold" style="color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 24px;">Engineering Design Studio</h2>
+      </div>
+     </div>
+     <div class="flex gap-3">
+      <div class="glass-panel rounded-lg px-4 py-2 text-center">
+       <span class="block text-xs text-slate-400">PROJECTS</span><strong id="completed-count" class="text-cyan-300">0 / 6</strong>
+      </div>
+      <div class="glass-panel rounded-lg px-4 py-2 text-center">
+       <span class="block text-xs text-slate-400">LIVE SCORE</span><strong id="live-score" class="text-emerald-300">0 / 60</strong>
+      </div>
+     </div>
+    </header>
+    <div class="max-w-[1600px] mx-auto grid grid-cols-1 xl:grid-cols-[.78fr_1.55fr_.9fr] gap-4">
+     <aside class="glass-panel rounded-2xl p-5 h-fit xl:sticky xl:top-4">
+      <p data-template-id="client-brief-label" class="canva-text tech-label text-xs text-cyan-300 mb-3" style="color: rgb(34, 211, 238); font-weight: 700; font-style: normal; font-size: 16px;">CLIENT BRIEF</p>
+      <h2 id="side-project-title" class="font-bold text-2xl"></h2>
+      <p id="side-project-brief" class="text-slate-300 mt-3 leading-relaxed"></p>
+      <div class="mt-6">
+       <p data-template-id="constraints-label" class="canva-text tech-label text-xs text-amber-300 mb-3" style="color: rgb(252, 211, 77); font-weight: 700; font-style: normal; font-size: 16px;">PROJECT CONSTRAINTS</p>
+       <div id="constraint-list" class="flex flex-wrap gap-2"></div>
+      </div>
+      <div class="mt-7 pt-5 border-t border-slate-700">
+       <p data-template-id="progress-label" class="canva-text text-sm text-slate-400" style="color: rgb(148, 163, 184); font-weight: 600; font-style: normal; font-size: 16px;">MISSION PROGRESS</p>
+       <div class="mt-2 h-2 bg-slate-800 rounded-full overflow-hidden">
+        <div id="progress-bar" class="h-full bg-cyan-400 transition-all" style="width:0%"></div>
+       </div>
+      </div>
+     </aside>
+     <section class="glass-panel rounded-2xl p-5 sm:p-7">
+      <div class="flex justify-between gap-4 items-start mb-6">
+       <div>
+        <p data-template-id="canvas-label" class="canva-text tech-label text-xs text-cyan-300 mb-2" style="color: rgb(34, 211, 238); font-weight: 700; font-style: normal; font-size: 16px;">LIVE ARCHITECTURE PREVIEW</p>
+        <h2 data-template-id="canvas-title" class="canva-text font-bold" style="color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 24px;">Build Your IoT Solution</h2>
+       </div><span id="project-indicator" class="rounded-full border border-cyan-400/40 px-3 py-1 text-xs text-cyan-200"></span>
+      </div>
+      <div class="rounded-2xl bg-slate-950/60 border border-slate-700 p-4 mb-7 overflow-x-auto">
+       <div class="min-w-[600px] grid grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] gap-3 items-center">
+        <div class="architecture-node rounded-xl p-3 text-center">
+         <span class="text-xs text-slate-400">SENSE</span><strong id="arch-sensor" class="block mt-1">—</strong>
+        </div><span class="architecture-arrow">→</span>
+        <div class="architecture-node rounded-xl p-3 text-center">
+         <span class="text-xs text-slate-400">CONNECT</span><strong id="arch-connectivity" class="block mt-1">—</strong>
+        </div><span class="architecture-arrow">→</span>
+        <div class="architecture-node rounded-xl p-3 text-center">
+         <span class="text-xs text-slate-400">PROCESS</span><strong id="arch-processing" class="block mt-1">—</strong>
+        </div><span class="architecture-arrow">→</span>
+        <div class="architecture-node rounded-xl p-3 text-center">
+         <span class="text-xs text-slate-400">ACT / VIEW</span><strong id="arch-output" class="block mt-1">—</strong>
+        </div>
+       </div>
+      </div>
+      <form id="design-form">
+       <div class="project-panel active" data-project="0">
+        <p data-template-id="guided-intro" class="canva-text mb-5 rounded-xl border border-cyan-400/25 bg-cyan-400/5 p-4 text-cyan-100" style="color: rgb(207, 250, 254); font-weight: 400; font-style: normal; font-size: 16px; line-height: 1.5;">Guided Project: Start with the Smart Meeting Room. A suitable design may use an Occupancy Sensor, Wi-Fi, ESP32, Smart Lighting &amp; Smart Air Conditioner, and a Building Management Dashboard. Consider why each component supports automatic control and building oversight.</p>
+       </div>
+       <div class="project-panel" data-project="1"></div>
+       <div class="project-panel" data-project="2"></div>
+       <div class="project-panel" data-project="3"></div>
+       <div class="project-panel" data-project="4"></div>
+       <div class="project-panel" data-project="5"></div>
+       <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+         <label data-template-id="sensor-label" class="canva-text block font-semibold mb-2" for="sensor-select" style="color: rgb(248, 250, 252); font-weight: 600; font-style: normal; font-size: 16px;">Sensor</label><select id="sensor-select" required=""><option value="">Choose a sensor</option><option>Occupancy Sensor</option><option>Soil Moisture Sensor</option><option>Heart Rate Sensor</option><option>Vibration Sensor</option><option>Ultrasonic Parking Sensor</option><option>Temperature Sensor</option><option>Smart Waste Fill-Level Sensor</option></select>
+        </div>
+        <div>
+         <label data-template-id="connectivity-label" class="canva-text block font-semibold mb-2" for="connectivity-select" style="color: rgb(248, 250, 252); font-weight: 600; font-style: normal; font-size: 16px;">Connectivity</label><select id="connectivity-select" required=""><option value="">Choose connectivity</option><option>Wi-Fi</option><option>LoRaWAN</option><option>Cellular (4G/5G)</option><option>Bluetooth Low Energy</option><option>Ethernet</option><option>NB-IoT</option></select>
+        </div>
+        <div>
+         <label data-template-id="processing-label" class="canva-text block font-semibold mb-2" for="processing-select" style="color: rgb(248, 250, 252); font-weight: 600; font-style: normal; font-size: 16px;">Processing Unit</label><select id="processing-select" required=""><option value="">Choose a processing unit</option><option>ESP32</option><option>Arduino</option><option>Raspberry Pi</option><option>Industrial PLC</option><option>Edge Gateway</option></select>
+        </div>
+        <div>
+         <label data-template-id="cloud-label" class="canva-text block font-semibold mb-2" for="cloud-select" style="color: rgb(248, 250, 252); font-weight: 600; font-style: normal; font-size: 16px;">Cloud Platform (optional)</label><select id="cloud-select"><option value="">No cloud platform selected</option><option>IoT Cloud Dashboard</option><option>Building Management Platform</option><option>Remote Analytics Platform</option><option>Mobile Backend Platform</option></select>
+        </div>
+        <div>
+         <label data-template-id="actuator-label" class="canva-text block font-semibold mb-2" for="actuator-select" style="color: rgb(248, 250, 252); font-weight: 600; font-style: normal; font-size: 16px;">Actuator</label><select id="actuator-select" required=""><option value="">Choose an actuator</option><option>Smart Lighting &amp; Smart Air Conditioner</option><option>Solenoid Water Valve</option><option>Staff Alert Notification</option><option>Machine Control Relay</option><option>Parking Guidance Sign</option><option>None Required</option></select>
+        </div>
+        <div>
+         <label data-template-id="ui-label" class="canva-text block font-semibold mb-2" for="ui-select" style="color: rgb(248, 250, 252); font-weight: 600; font-style: normal; font-size: 16px;">User Interface</label><select id="ui-select" required=""><option value="">Choose a user interface</option><option>Building Management Dashboard</option><option>Lecturer Remote Dashboard</option><option>Mobile Monitoring App</option><option>Healthcare Staff Dashboard</option><option>Manager Analytics Dashboard</option><option>Driver Mobile Application</option></select>
+        </div>
+       </div>
+       <div class="mt-7">
+        <h3 data-template-id="justification-title" class="canva-text font-bold mb-4" style="color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 19px;">Engineering Justification</h3>
+        <div class="grid gap-4">
+         <div>
+          <label data-template-id="sensor-why-label" class="canva-text block text-sm text-slate-300 mb-1" for="sensor-why" style="color: rgb(203, 213, 225); font-weight: 500; font-style: normal; font-size: 16px;">Why is your sensor appropriate for this client requirement?</label><textarea id="sensor-why" required=""></textarea>
+         </div>
+         <div>
+          <label data-template-id="connectivity-why-label" class="canva-text block text-sm text-slate-300 mb-1" for="connectivity-why" style="color: rgb(203, 213, 225); font-weight: 500; font-style: normal; font-size: 16px;">Why is your connectivity choice suitable for the constraints?</label><textarea id="connectivity-why" required=""></textarea>
+         </div>
+         <div>
+          <label data-template-id="architecture-why-label" class="canva-text block text-sm text-slate-300 mb-1" for="architecture-why" style="color: rgb(203, 213, 225); font-weight: 500; font-style: normal; font-size: 16px;">How will your components work together as one IoT solution?</label><textarea id="architecture-why" required=""></textarea>
+         </div>
+        </div>
+       </div>
+      </form>
+     </section>
+     <aside class="glass-panel rounded-2xl p-5 h-fit xl:sticky xl:top-4">
+      <p data-template-id="selection-label" class="canva-text tech-label text-xs text-cyan-300 mb-3" style="color: rgb(34, 211, 238); font-weight: 700; font-style: normal; font-size: 16px;">SELECTED COMPONENTS</p>
+      <div id="selection-summary" class="space-y-2 text-sm text-slate-300"></div>
+      <div class="mt-6 border-t border-slate-700 pt-5">
+       <p data-template-id="checker-title" class="canva-text font-bold mb-2" style="color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 16px;">CONSTRAINT CHECKER</p>
+       <p id="checker-message" class="text-sm text-slate-400 leading-relaxed">Make selections to begin checking your architecture.</p>
+      </div><button id="submit-design" data-template-id="submit-button" type="button" class="canva-button w-full mt-7 rounded-xl px-5 py-4 font-bold transition hover:brightness-110 inline-flex justify-center gap-2" style="background: rgb(16, 185, 129); color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 16px;">Submit Design for Review</button>
+      <p id="form-message" class="mt-3 min-h-[1.25rem] text-sm text-amber-300" aria-live="polite"></p>
+     </aside>
+    </div>
+   </section>
+   <section id="review-screen" class="screen items-center justify-center px-5 py-10">
+    <div class="w-full max-w-4xl glass-panel rounded-3xl overflow-hidden reveal">
+     <div data-template-id="review-banner" class="canva-banner px-7 py-4" style="background: linear-gradient(90deg, rgb(6, 78, 59), rgb(15, 23, 42));">
+      <p data-template-id="review-kicker" class="canva-text tech-label font-bold" style="color: rgb(110, 231, 183); font-weight: 700; font-style: normal; font-size: 16px;">ENGINEERING REVIEW</p>
+     </div>
+     <div class="p-7 sm:p-10">
+      <h2 id="review-project-title" class="font-bold mb-2"></h2>
+      <p data-template-id="review-intro" class="canva-text text-slate-300 mb-7" style="color: rgb(203, 213, 225); font-weight: 400; font-style: normal; font-size: 16px;">This review recognises practical engineering choices and identifies opportunities to refine your architecture.</p>
+      <div class="grid md:grid-cols-2 gap-4">
+       <article class="review-box rounded-xl bg-slate-900/60 p-5">
+        <h3 data-template-id="strengths-label" class="canva-text font-bold text-emerald-300 mb-2" style="color: rgb(110, 231, 183); font-weight: 700; font-style: normal; font-size: 19px;">Strengths</h3>
+        <p id="review-strengths" class="text-slate-300"></p>
+       </article>
+       <article class="review-box rounded-xl bg-slate-900/60 p-5" style="border-color:#f59e0b">
+        <h3 data-template-id="improvements-label" class="canva-text font-bold text-amber-300 mb-2" style="color: rgb(252, 211, 77); font-weight: 700; font-style: normal; font-size: 19px;">Engineering Improvements</h3>
+        <p id="review-improvements" class="text-slate-300"></p>
+       </article>
+       <article class="review-box rounded-xl bg-slate-900/60 p-5">
+        <h3 data-template-id="alternatives-label" class="canva-text font-bold text-cyan-300 mb-2" style="color: rgb(103, 232, 249); font-weight: 700; font-style: normal; font-size: 19px;">Possible Alternative Components</h3>
+        <p id="review-alternatives" class="text-slate-300"></p>
+       </article>
+       <article class="review-box rounded-xl bg-slate-900/60 p-5">
+        <h3 data-template-id="recommendation-label" class="canva-text font-bold text-cyan-300 mb-2" style="color: rgb(103, 232, 249); font-weight: 700; font-style: normal; font-size: 19px;">Overall Recommendation</h3>
+        <p id="review-recommendation" class="text-slate-300"></p>
+       </article>
+      </div>
+      <div class="mt-7 rounded-xl border border-cyan-400/25 bg-cyan-400/5 p-5 flex flex-wrap justify-between gap-3">
+       <div>
+        <p class="text-sm text-slate-400">PROJECT SCORE</p><strong id="project-score" class="text-3xl text-cyan-300"></strong>
+       </div><button id="improve-btn" data-template-id="improve-button" type="button" class="canva-button rounded-xl px-5 py-3 font-bold" style="background: rgb(51, 65, 85); color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 16px;">Improve Design</button> <button id="next-btn" data-template-id="next-button" type="button" class="canva-button rounded-xl px-5 py-3 font-bold" style="background: rgb(34, 211, 238); color: rgb(15, 23, 42); font-weight: 700; font-style: normal; font-size: 16px;">Continue Mission</button>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="final-screen" class="screen items-center justify-center px-5 py-10">
+    <div class="w-full max-w-4xl glass-panel rounded-3xl p-7 sm:p-10 reveal">
+     <p data-template-id="final-kicker" class="canva-text tech-label text-cyan-300 mb-3" style="color: rgb(34, 211, 238); font-weight: 700; font-style: normal; font-size: 16px;">FINAL ENGINEERING REVIEW</p>
+     <h2 data-template-id="final-title" class="canva-text font-bold mb-4" style="color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 24px;">Mission Complete</h2>
+     <div class="grid sm:grid-cols-2 gap-4 mb-7">
+      <div class="rounded-2xl bg-slate-950/60 p-5">
+       <p class="text-slate-400 text-sm">FINAL SCORE</p><strong id="final-score" class="text-4xl text-emerald-300"></strong>
+      </div>
+      <div class="rounded-2xl bg-slate-950/60 p-5">
+       <p class="text-slate-400 text-sm">PERFORMANCE LEVEL</p><strong id="performance-level" class="text-xl text-cyan-300"></strong>
+      </div>
+     </div>
+     <div id="project-summary" class="space-y-2 mb-7"></div>
+     <p id="overall-feedback" class="rounded-xl border border-cyan-400/25 bg-cyan-400/5 p-5 text-slate-200"></p>
+     <div class="mt-8 border-t border-slate-700 pt-7">
+      <h3 data-template-id="reflection-title" class="canva-text font-bold mb-2" style="color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 19px;">Engineering Reflection</h3>
+      <p data-template-id="reflection-prompt" class="canva-text text-slate-300 mb-4" style="color: rgb(203, 213, 225); font-weight: 400; font-style: normal; font-size: 16px; line-height: 1.5;">A local council wants to implement a Smart Waste Management system. Design a high-level IoT solution. Identify the required sensor(s), connectivity, processing unit, cloud platform if required, actuator(s), and user interface. Explain briefly why each component is appropriate and how they work together.</p><label data-template-id="reflection-label" class="canva-text block text-sm text-slate-300 mb-2" for="reflection-text" style="color: rgb(226, 232, 240); font-weight: 600; font-style: normal; font-size: 16px;">Your non-graded engineering reflection</label> <textarea id="reflection-text" class="min-h-[180px]"></textarea> <button id="complete-btn" data-template-id="complete-button" type="button" class="canva-button mt-5 rounded-xl px-6 py-4 font-bold inline-flex items-center gap-2" style="background: rgb(16, 185, 129); color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 16px;">Complete Mission</button>
+     </div>
+    </div>
+   </section>
+   <section id="complete-screen" class="screen items-center justify-center px-5 py-10">
+    <div class="w-full max-w-3xl text-center glass-panel rounded-3xl p-8 sm:p-14 reveal">
+     <div class="w-16 h-16 rounded-full bg-emerald-400 text-slate-950 grid place-items-center mx-auto mb-6">
+      <i data-lucide="award"></i>
+     </div>
+     <h2 data-template-id="complete-title" class="canva-text font-bold mb-4" style="color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 24px;">Congratulations!</h2>
+     <p data-template-id="complete-message" class="canva-text text-slate-300 text-lg max-w-xl mx-auto" style="color: rgb(203, 213, 225); font-weight: 400; font-style: normal; font-size: 18px;">You have successfully completed all SmartCity Engineering missions.</p>
+     <div class="mt-9 flex flex-wrap justify-center gap-3"><button id="replay-btn" data-template-id="replay-button" type="button" class="canva-button rounded-xl px-6 py-4 font-bold" style="background: rgb(34, 211, 238); color: rgb(15, 23, 42); font-weight: 700; font-style: normal; font-size: 16px;">Replay Mission</button> <button id="portal-btn" data-template-id="portal-button" type="button" class="canva-button rounded-xl px-6 py-4 font-bold" style="background: rgb(51, 65, 85); color: rgb(248, 250, 252); font-weight: 700; font-style: normal; font-size: 16px;">Return to Main Portal</button>
+     </div>
+    </div>
+   </section>
+  </main>
+  <script src="/_sdk/b23f1f6ec78e9bd4.editing_sdk.js" integrity="sha512-WFdQutvUZzxrmcHkL8cbfuFDTeF8Cn8Bt3yqX/a/OdiqPz/t9UcjsIsZK7D+tMTmC2JTwhwRJNyfcHmIWhG8Wg=="></script>
+  <script>
+    const projects = [
+      { title: "Guided Project: Smart Meeting Room", brief: "Automatically switch lights and air conditioning on when people enter the meeting room and switch them off when the room is empty.", constraints: ["Indoor deployment", "Automatic control", "Occupancy detection"], sensor: ["Occupancy Sensor"], connectivity: ["Wi-Fi", "Bluetooth Low Energy"], processing: ["ESP32", "Raspberry Pi"], actuator: ["Smart Lighting & Smart Air Conditioner"], ui: ["Building Management Dashboard"], cloud: false },
+      { title: "Project 1: Smart Classroom", brief: "Create a classroom that automatically controls lighting and air conditioning according to occupancy while allowing lecturers to monitor the classroom remotely.", constraints: ["Indoor deployment", "Low installation cost", "Reliable communication"], sensor: ["Occupancy Sensor"], connectivity: ["Wi-Fi", "Ethernet"], processing: ["ESP32", "Raspberry Pi"], actuator: ["Smart Lighting & Smart Air Conditioner"], ui: ["Lecturer Remote Dashboard", "Building Management Dashboard"], cloud: true },
+      { title: "Project 2: Smart Agriculture", brief: "Design an irrigation system for a large plantation.", constraints: ["Long communication range", "Low power consumption", "Remote monitoring", "Automatic watering"], sensor: ["Soil Moisture Sensor"], connectivity: ["LoRaWAN", "NB-IoT", "Cellular (4G/5G)"], processing: ["ESP32", "Edge Gateway"], actuator: ["Solenoid Water Valve"], ui: ["Mobile Monitoring App", "Manager Analytics Dashboard"], cloud: true },
+      { title: "Project 3: Smart Healthcare", brief: "Develop a patient monitoring system capable of detecting abnormal heart rates and notifying healthcare staff immediately.", constraints: ["Reliable communication", "Near real-time alerts", "Continuous monitoring", "Remote dashboard"], sensor: ["Heart Rate Sensor"], connectivity: ["Wi-Fi", "Cellular (4G/5G)", "Ethernet"], processing: ["ESP32", "Edge Gateway", "Raspberry Pi"], actuator: ["Staff Alert Notification"], ui: ["Healthcare Staff Dashboard"], cloud: true },
+      { title: "Project 4: Smart Factory", brief: "Monitor machine performance continuously and allow managers to review production history from any location.", constraints: ["Continuous operation", "Historical analytics", "Remote access", "High reliability"], sensor: ["Vibration Sensor", "Temperature Sensor"], connectivity: ["Ethernet", "Wi-Fi", "Cellular (4G/5G)"], processing: ["Industrial PLC", "Edge Gateway"], actuator: ["Machine Control Relay", "None Required"], ui: ["Manager Analytics Dashboard"], cloud: true },
+      { title: "Project 5: Smart Parking", brief: "Allow drivers to identify available parking spaces using a mobile application before entering the parking facility.", constraints: ["Outdoor deployment", "Real-time availability", "Mobile access", "Multiple parking sensors"], sensor: ["Ultrasonic Parking Sensor"], connectivity: ["LoRaWAN", "NB-IoT", "Cellular (4G/5G)", "Wi-Fi"], processing: ["ESP32", "Edge Gateway"], actuator: ["Parking Guidance Sign", "None Required"], ui: ["Driver Mobile Application"], cloud: true }
+    ];
+
+    const ids = ["sensor-select", "connectivity-select", "processing-select", "cloud-select", "actuator-select", "ui-select"];
+    let current = 0;
+    let scores = Array(6).fill(0);
+    let completed = Array(6).fill(false);
+
+    const $ = id => document.getElementById(id);
+    const showScreen = id => {
+      document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
+      $(id).classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    function selected() {
+      return {
+        sensor: $("sensor-select").value, connectivity: $("connectivity-select").value,
+        processing: $("processing-select").value, cloud: $("cloud-select").value,
+        actuator: $("actuator-select").value, ui: $("ui-select").value
+      };
+    }
+
+    function updateStudio() {
+      const p = projects[current], s = selected();
+      $("side-project-title").textContent = p.title;
+      $("side-project-brief").textContent = p.brief;
+      $("project-indicator").textContent = `PROJECT ${current + 1} OF 6`;
+      $("constraint-list").replaceChildren(...p.constraints.map(c => {
+        const chip = document.createElement("span"); chip.className = "constraint-chip rounded-full px-3 py-1 text-xs"; chip.textContent = c; return chip;
+      }));
+      $("arch-sensor").textContent = s.sensor || "Select sensor";
+      $("arch-connectivity").textContent = s.connectivity || "Select network";
+      $("arch-processing").textContent = s.processing || "Select unit";
+      $("arch-output").textContent = `${s.actuator || "Actuator"} / ${s.ui || "Interface"}`;
+      const fields = [["Sensor",s.sensor],["Connectivity",s.connectivity],["Processing",s.processing],["Cloud",s.cloud || "Not selected"],["Actuator",s.actuator],["Interface",s.ui]];
+      $("selection-summary").replaceChildren(...fields.map(([label,value]) => {
+        const row = document.createElement("div"); row.className = "flex justify-between gap-3 border-b border-slate-800 pb-2";
+        row.innerHTML = `<span class="text-slate-500">${label}</span><span class="text-right">${value || "—"}</span>`; return row;
+      }));
+      const chosen = [s.sensor,s.connectivity,s.processing,s.actuator,s.ui].filter(Boolean).length;
+      $("checker-message").textContent = chosen < 5 ? `Architecture is ${chosen}/5 core components complete.` : "Core architecture is complete. Add clear engineering reasoning before submitting.";
+      $("progress-bar").style.width = `${(completed.filter(Boolean).length / 6) * 100}%`;
+      $("completed-count").textContent = `${completed.filter(Boolean).length} / 6`;
+      $("live-score").textContent = `${scores.reduce((a,b)=>a+b,0)} / 60`;
+    }
+
+    function scoreProject() {
+      const p = projects[current], s = selected();
+      let score = 0, strengths = [], improvements = [];
+      if (p.sensor.includes(s.sensor)) { score += 4; strengths.push("The selected sensor directly captures the key condition the client needs to monitor."); }
+      else improvements.push("Consider a sensor that measures the client’s primary condition more directly.");
+      if (p.connectivity.includes(s.connectivity)) { score += 2; strengths.push("Your communication technology is suitable for this environment and operating requirement."); }
+      else improvements.push(current === 2 ? "A large plantation benefits from LoRaWAN, NB-IoT, or cellular connectivity rather than a short-range indoor network." : "Review whether your connectivity choice meets the reliability, range, and access requirements.");
+      const coreOk = p.processing.includes(s.processing) && p.actuator.includes(s.actuator) && p.ui.includes(s.ui) && (!p.cloud || s.cloud);
+      if (coreOk) { score += 2; strengths.push("The processing, output, and user access layers form a practical end-to-end IoT architecture."); }
+      else improvements.push("Check that your processing unit, output method, remote platform, and user interface each support the client workflow.");
+      const justificationCount = ["sensor-why","connectivity-why","architecture-why"].filter(id => $(id).value.trim().length >= 18).length;
+      if (justificationCount >= 3) { score += 2; strengths.push("Your written justification demonstrates clear engineering reasoning."); }
+      else improvements.push("Strengthen each justification by linking your choice to cost, power, range, reliability, or usability.");
+      return { score, strengths, improvements };
+    }
+
+    function submitDesign() {
+      const form = $("design-form");
+      if (!form.reportValidity()) {
+        $("form-message").textContent = "Complete each selection and justification before requesting an engineering review.";
+        return;
+      }
+      const evaluation = scoreProject();
+      scores[current] = evaluation.score;
+      completed[current] = true;
+      $("review-project-title").textContent = projects[current].title;
+      $("review-strengths").textContent = evaluation.strengths.length ? evaluation.strengths.join(" ") : "Your design is a starting point, but the client requirements need closer alignment.";
+      $("review-improvements").textContent = evaluation.improvements.length ? evaluation.improvements.join(" ") : "Your main component choices align well with the stated constraints.";
+      $("review-alternatives").textContent = current === 2 ? "For very remote sites, NB-IoT or cellular can be useful alternatives where LoRaWAN infrastructure is unavailable." : "Alternative technologies can also be suitable when they meet the same client constraints, budget, and deployment conditions.";
+      $("review-recommendation").textContent = evaluation.score >= 8 ? "Recommended: this proposal is well aligned with the client brief. Document installation and maintenance details before deployment." : "Recommended with refinement: improve the highlighted decisions, then resubmit a stronger proposal.";
+      $("project-score").textContent = `${evaluation.score} / 10`;
+      $("next-btn").style.display = current === 5 ? "inline-flex" : "inline-flex";
+      updateStudio();
+      showScreen("review-screen");
+    }
+
+    function loadProject(index) {
+      current = index;
+      ids.forEach(id => $(id).value = "");
+      ["sensor-why","connectivity-why","architecture-why"].forEach(id => $(id).value = "");
+      document.querySelectorAll(".project-panel").forEach(panel => panel.classList.toggle("active", Number(panel.dataset.project) === current));
+      $("form-message").textContent = "";
+      updateStudio();
+      showScreen("studio-screen");
+    }
+
+    function finalReview() {
+      const total = scores.reduce((a,b)=>a+b,0);
+      let level = total >= 45 ? "SmartCity Lead Solutions Engineer" : total >= 35 ? "IoT Solution Designer" : total >= 25 ? "Systems Design Engineer" : "Junior Design Engineer";
+      $("final-score").textContent = `${total} / 60`;
+      $("performance-level").textContent = level;
+      $("project-summary").replaceChildren(...projects.map((p,i) => {
+        const row = document.createElement("div"); row.className = "flex justify-between rounded-lg bg-slate-900/60 px-4 py-3 gap-4";
+        row.innerHTML = `<span>${p.title}</span><strong class="text-cyan-300">${scores[i]} / 10</strong>`; return row;
+      }));
+      $("overall-feedback").textContent = total >= 45 ? "Excellent work. Your designs consistently matched client requirements while balancing engineering constraints effectively." : total >= 35 ? "Strong engineering work. Review any lower-scoring communication and remote-access decisions to make your solutions even more robust." : "You have built complete IoT architectures. Revisit the project constraints, especially communication range, reliability, and the relationship between sensing and action.";
+      showScreen("final-screen");
+    }
+
+    function resetMission() {
+      current = 0; scores = Array(6).fill(0); completed = Array(6).fill(false);
+      ids.forEach(id => $(id).value = "");
+      ["sensor-why","connectivity-why","architecture-why","reflection-text"].forEach(id => $(id).value = "");
+      updateStudio(); showScreen("briefing-screen");
+    }
+
+    $("start-btn").addEventListener("click", () => showScreen("howto-screen"));
+    $("begin-btn").addEventListener("click", () => loadProject(0));
+    ids.forEach(id => $(id).addEventListener("change", updateStudio));
+    $("submit-design").addEventListener("click", submitDesign);
+    $("improve-btn").addEventListener("click", () => showScreen("studio-screen"));
+    $("next-btn").addEventListener("click", () => current === 5 ? finalReview() : loadProject(current + 1));
+    $("complete-btn").addEventListener("click", () => showScreen("complete-screen"));
+    $("replay-btn").addEventListener("click", resetMission);
+    $("portal-btn").addEventListener("click", () => {
+      $("portal-btn").textContent = "Mission completed. Return to the main portal to continue your learning journey.";
+      $("portal-btn").disabled = true;
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      updateStudio();
+    });
+  </script>
+ 
+</body></html>
